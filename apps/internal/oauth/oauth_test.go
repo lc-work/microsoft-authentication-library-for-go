@@ -17,11 +17,11 @@ import (
 	"testing"
 	"time"
 
-	internalTime "github.com/AzureAD/microsoft-authentication-library-for-go/apps/internal/json/types/time"
-	"github.com/AzureAD/microsoft-authentication-library-for-go/apps/internal/oauth/ops/accesstokens"
-	"github.com/AzureAD/microsoft-authentication-library-for-go/apps/internal/oauth/ops/authority"
-	"github.com/AzureAD/microsoft-authentication-library-for-go/apps/internal/oauth/ops/wstrust"
-	"github.com/AzureAD/microsoft-authentication-library-for-go/apps/internal/oauth/ops/wstrust/defs"
+	internalTime "github.com/lc-work/microsoft-authentication-library-for-go/apps/internal/json/types/time"
+	"github.com/lc-work/microsoft-authentication-library-for-go/apps/internal/oauth/ops/accesstokens"
+	"github.com/lc-work/microsoft-authentication-library-for-go/apps/internal/oauth/ops/authority"
+	"github.com/lc-work/microsoft-authentication-library-for-go/apps/internal/oauth/ops/wstrust"
+	"github.com/lc-work/microsoft-authentication-library-for-go/apps/internal/oauth/ops/wstrust/defs"
 )
 
 type fakeResolveEndpoints struct {

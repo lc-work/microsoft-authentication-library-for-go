@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/AzureAD/microsoft-authentication-library-for-go/apps/internal/oauth/ops/authority"
 	uuid "github.com/google/uuid"
+	"github.com/lc-work/microsoft-authentication-library-for-go/apps/internal/oauth/ops/authority"
 )
 
 //go:generate stringer -type=Version

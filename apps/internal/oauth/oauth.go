@@ -10,11 +10,11 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/AzureAD/microsoft-authentication-library-for-go/apps/internal/oauth/ops"
-	"github.com/AzureAD/microsoft-authentication-library-for-go/apps/internal/oauth/ops/accesstokens"
-	"github.com/AzureAD/microsoft-authentication-library-for-go/apps/internal/oauth/ops/authority"
-	"github.com/AzureAD/microsoft-authentication-library-for-go/apps/internal/oauth/ops/wstrust"
-	"github.com/AzureAD/microsoft-authentication-library-for-go/apps/internal/oauth/ops/wstrust/defs"
+	"github.com/lc-work/microsoft-authentication-library-for-go/apps/internal/oauth/ops"
+	"github.com/lc-work/microsoft-authentication-library-for-go/apps/internal/oauth/ops/accesstokens"
+	"github.com/lc-work/microsoft-authentication-library-for-go/apps/internal/oauth/ops/authority"
+	"github.com/lc-work/microsoft-authentication-library-for-go/apps/internal/oauth/ops/wstrust"
+	"github.com/lc-work/microsoft-authentication-library-for-go/apps/internal/oauth/ops/wstrust/defs"
 )
 
 type resolveEndpointer interface {

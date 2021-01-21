@@ -1,4 +1,4 @@
-module github.com/AzureAD/microsoft-authentication-library-for-go
+module github.com/lc-work/microsoft-authentication-library-for-go
 
 go 1.14
 

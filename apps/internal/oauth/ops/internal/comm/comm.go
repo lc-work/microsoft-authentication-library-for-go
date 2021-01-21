@@ -19,9 +19,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/AzureAD/microsoft-authentication-library-for-go/apps/errors"
-	customJSON "github.com/AzureAD/microsoft-authentication-library-for-go/apps/internal/json"
 	"github.com/google/uuid"
+	"github.com/lc-work/microsoft-authentication-library-for-go/apps/errors"
+	customJSON "github.com/lc-work/microsoft-authentication-library-for-go/apps/internal/json"
 )
 
 const version = "0.1.0"

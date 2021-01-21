@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/AzureAD/microsoft-authentication-library-for-go/apps/internal/shared"
-	"github.com/AzureAD/microsoft-authentication-library-for-go/apps/public"
+	"github.com/lc-work/microsoft-authentication-library-for-go/apps/internal/shared"
+	"github.com/lc-work/microsoft-authentication-library-for-go/apps/public"
 )
 
 func acquireByUsernamePasswordPublic() {
