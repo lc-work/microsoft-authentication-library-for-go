@@ -53,11 +53,12 @@ type AcquireTokenSilentParameters struct {
 // Code challenges are used to secure authorization code grants; for more information, visit
 // https://tools.ietf.org/html/rfc7636.
 type AcquireTokenAuthCodeParameters struct {
-	Scopes     []string
-	Code       string
-	Challenge  string
-	AppType    accesstokens.AppType
-	Credential *accesstokens.Credential
+	Scopes      []string
+	Redirecturi string
+	Code        string
+	Challenge   string
+	AppType     accesstokens.AppType
+	Credential  *accesstokens.Credential
 }
 
 // AuthResult contains the results of one token acquisition operation in PublicClientApplication
@@ -222,6 +223,10 @@ func (b Client) AcquireTokenByAuthCode(ctx context.Context, authCodeParams Acqui
 	authParams.Scopes = authCodeParams.Scopes
 	authParams.Redirecturi = "https://login.microsoftonline.com/common/oauth2/nativeclient"
 	authParams.AuthorizationType = authority.ATAuthCode
+
+	if authCodeParams.Redirecturi != "" {
+		authParams.Redirecturi = authCodeParams.Redirecturi
+	}
 
 	var cc *accesstokens.Credential
 	if authCodeParams.AppType == accesstokens.ATConfidential {

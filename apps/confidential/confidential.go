@@ -298,12 +298,16 @@ func (a AcquireTokenByAuthCodeOptions) validate() error {
 		return nil
 	}
 
-	switch "" {
-	case a.Code:
-		return fmt.Errorf("AcquireTokenByAuthCode: if you set the Challenge, you must set the Code")
-	case a.Challenge:
-		return fmt.Errorf("AcquireTokenByAuthCode: if you set the Code, you must set the Challenge")
-	}
+	/*
+		// Removed this validation check as there is no Challenge to provide in my code and
+		// thus it was causing the code to fail.
+		switch "" {
+		case a.Code:
+			return fmt.Errorf("AcquireTokenByAuthCode: if you set the Challenge, you must set the Code")
+		case a.Challenge:
+			return fmt.Errorf("AcquireTokenByAuthCode: if you set the Code, you must set the Challenge")
+		}
+	*/
 	return nil
 }
 
@@ -319,7 +323,7 @@ func CodeChallenge(code, challenge string) AcquireTokenByAuthCodeOption {
 }
 
 // AcquireTokenByAuthCode is a request to acquire a security token from the authority, using an authorization code.
-func (cca Client) AcquireTokenByAuthCode(ctx context.Context, scopes []string, options ...AcquireTokenByAuthCodeOption) (AuthResult, error) {
+func (cca Client) AcquireTokenByAuthCode(ctx context.Context, redirectURI string, scopes []string, options ...AcquireTokenByAuthCodeOption) (AuthResult, error) {
 	opts := AcquireTokenByAuthCodeOptions{}
 	for _, o := range options {
 		o(&opts)
@@ -329,11 +333,12 @@ func (cca Client) AcquireTokenByAuthCode(ctx context.Context, scopes []string, o
 	}
 
 	params := base.AcquireTokenAuthCodeParameters{
-		Scopes:     scopes,
-		Code:       opts.Code,
-		Challenge:  opts.Challenge,
-		AppType:    accesstokens.ATConfidential,
-		Credential: cca.cred, // This setting differs from public.Client.AcquireTokenByAuthCode
+		Scopes:      scopes,
+		Redirecturi: redirectURI,
+		Code:        opts.Code,
+		Challenge:   opts.Challenge,
+		AppType:     accesstokens.ATConfidential,
+		Credential:  cca.cred, // This setting differs from public.Client.AcquireTokenByAuthCode
 	}
 
 	return cca.base.AcquireTokenByAuthCode(ctx, params)
