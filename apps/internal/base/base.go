@@ -134,7 +134,7 @@ func New(clientID string, authorityURI string, cacheAccessor cache.ExportReplace
 }
 
 // AuthCodeURL creates a URL used to acquire an authorization code.
-func (b Client) AuthCodeURL(ctx context.Context, clientID, redirectURI string, scopes []string, authParams authority.AuthParams) (string, error) {
+func (b Client) AuthCodeURL(ctx context.Context, clientID, redirectURI, stateID string, scopes []string, authParams authority.AuthParams) (string, error) {
 	endpoints, err := b.Token.ResolveEndpoints(ctx, authParams.AuthorityInfo, "")
 	if err != nil {
 		return "", err
@@ -147,6 +147,7 @@ func (b Client) AuthCodeURL(ctx context.Context, clientID, redirectURI string, s
 
 	v := url.Values{}
 	v.Add("client_id", clientID)
+	v.Add("state", stateID)
 	v.Add("response_type", "code")
 	v.Add("redirect_uri", redirectURI)
 	v.Add("scope", strings.Join(scopes, " "))

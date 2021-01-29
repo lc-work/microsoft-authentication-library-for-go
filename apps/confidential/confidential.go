@@ -249,8 +249,8 @@ func (cca Client) UserID() string {
 }
 
 // AuthCodeURL creates a URL used to acquire an authorization code. Users need to call CreateAuthorizationCodeURLParameters and pass it in.
-func (cca Client) AuthCodeURL(ctx context.Context, clientID, redirectURI string, scopes []string) (string, error) {
-	return cca.base.AuthCodeURL(ctx, clientID, redirectURI, scopes, cca.base.AuthParams)
+func (cca Client) AuthCodeURL(ctx context.Context, clientID, redirectURI, stateID string, scopes []string) (string, error) {
+	return cca.base.AuthCodeURL(ctx, clientID, redirectURI, stateID, scopes, cca.base.AuthParams)
 }
 
 // AcquireTokenSilentOptions are all the optional settings to an AcquireTokenSilent() call.
@@ -298,16 +298,13 @@ func (a AcquireTokenByAuthCodeOptions) validate() error {
 		return nil
 	}
 
-	/*
-		// Removed this validation check as there is no Challenge to provide in my code and
-		// thus it was causing the code to fail.
-		switch "" {
-		case a.Code:
-			return fmt.Errorf("AcquireTokenByAuthCode: if you set the Challenge, you must set the Code")
-		case a.Challenge:
-			return fmt.Errorf("AcquireTokenByAuthCode: if you set the Code, you must set the Challenge")
-		}
-	*/
+	switch "" {
+	case a.Code:
+		return fmt.Errorf("AcquireTokenByAuthCode: if you set the Challenge, you must set the Code")
+	case a.Challenge:
+		return fmt.Errorf("AcquireTokenByAuthCode: if you set the Code, you must set the Challenge")
+	}
+
 	return nil
 }
 
