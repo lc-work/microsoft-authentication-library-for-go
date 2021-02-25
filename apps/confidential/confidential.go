@@ -305,8 +305,9 @@ type AcquireTokenByAuthCodeOptions struct {
 type AcquireTokenByAuthCodeOption func(a *AcquireTokenByAuthCodeOptions)
 
 // WithChallenge allows you to provide a challenge for the .AcquireTokenByAuthCode() call.
-func WithChallenge(challenge string) AcquireTokenByAuthCodeOption {
+func WithChallenge(code, challenge string) AcquireTokenByAuthCodeOption {
 	return func(a *AcquireTokenByAuthCodeOptions) {
+		a.Code = code
 		a.Challenge = challenge
 	}
 }
