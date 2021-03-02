@@ -10,7 +10,7 @@ import (
 	"io/ioutil"
 	"time"
 
-	"github.com/AzureAD/microsoft-authentication-library-for-go/apps/errors"
+	"github.com/lc-work/microsoft-authentication-library-for-go/apps/errors"
 	"github.com/lc-work/microsoft-authentication-library-for-go/apps/internal/oauth/ops"
 	"github.com/lc-work/microsoft-authentication-library-for-go/apps/internal/oauth/ops/accesstokens"
 	"github.com/lc-work/microsoft-authentication-library-for-go/apps/internal/oauth/ops/authority"
