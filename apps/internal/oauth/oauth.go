@@ -97,9 +97,11 @@ func (t *Client) Credential(ctx context.Context, authParams authority.AuthParams
 	if cred.Secret != "" {
 		return t.AccessTokens.FromClientSecret(ctx, authParams, cred.Secret)
 	}
-
-	jwt, err := cred.JWT(authParams)
-	if err != nil {
+	var jwt string
+	var err error
+	if cred.Assertion != "" {
+		jwt = cred.Assertion
+	} else if jwt, err = cred.JWT(authParams); err != nil {
 		return accesstokens.TokenResponse{}, err
 	}
 	return t.AccessTokens.FromAssertion(ctx, authParams, jwt)
@@ -116,6 +118,12 @@ func (t *Client) Refresh(ctx context.Context, reqType accesstokens.AppType, auth
 // UsernamePassword retrieves a token where a username and password is used. However, if this is
 // a user realm of "Federated", this uses SAML tokens. If "Managed", uses normal username/password.
 func (t *Client) UsernamePassword(ctx context.Context, authParams authority.AuthParams) (accesstokens.TokenResponse, error) {
+	if authParams.AuthorityInfo.AuthorityType == authority.ADFS {
+		if err := t.resolveEndpoint(ctx, &authParams, authParams.Username); err != nil {
+			return accesstokens.TokenResponse{}, err
+		}
+		return t.AccessTokens.FromUsernamePassword(ctx, authParams)
+	}
 	if err := t.resolveEndpoint(ctx, &authParams, ""); err != nil {
 		return accesstokens.TokenResponse{}, err
 	}
