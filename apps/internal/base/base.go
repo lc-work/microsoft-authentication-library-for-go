@@ -249,8 +249,8 @@ func (b Client) AcquireTokenByAuthCode(ctx context.Context, authCodeParams Acqui
 	authParams.Redirecturi = authCodeParams.RedirectURI
 	authParams.AuthorizationType = authority.ATAuthCode
 
-	if authCodeParams.Redirecturi != "" {
-		authParams.Redirecturi = authCodeParams.Redirecturi
+	if authCodeParams.RedirectURI != "" {
+		authParams.Redirecturi = authCodeParams.RedirectURI
 	}
 
 	var cc *accesstokens.Credential
